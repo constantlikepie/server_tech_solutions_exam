@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mini Product App (Pricing Modes)</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <h1>Mini Product App</h1>
+
+    <div class="card">
+      <h2>Add Product</h2>
+      <form id="productForm">
+        <div class="row">
+          <label>Name</label>
+          <input id="name" type="text" placeholder="e.g. SSD 1TB" />
+        </div>
+        <div class="row">
+          <label>Unit Price</label>
+          <input id="unit_price" type="number" step="0.01" placeholder="e.g. 199.99" />
+        </div>
+        <div class="row">
+          <label>Qty</label>
+          <input id="qty" type="number" step="1" placeholder="e.g. 10" />
+        </div>
+        <div class="row">
+          <label>Pricing Mode</label>
+          <select id="pricing_mode">
+            <option value="standard">standard</option>
+            <option value="bulk">bulk</option>
+            <option value="clearance">clearance</option>
+          </select>
+        </div>
+        <button type="submit" id="submitBtn">Add</button>
+        <div id="msg" class="msg"></div>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Products</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Unit Price</th>
+            <th>Qty</th>
+            <th>Mode</th>
+            <th>Discount %</th>
+            <th>Total</th>
+            <th>Created</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+
+      <div class="summary" id="summary">
+        <!-- INTENTIONAL: summary not implemented -->
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
