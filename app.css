@@ -1,0 +1,36 @@
+.float-right {
+    float: right !important;
+}
+
+#submitBtn {
+    background-color: #20b9f3;
+    color: white;
+    width: 120px;
+}
+
+#productForm {
+    width: 100%;
+    display: inline-block;
+}
+
+.msg {
+    padding: 25px;
+    color: white !important;
+    display: none;
+    border-radius: 8px;
+}
+
+.msg-success {
+    display: block;
+    background-color: #66c366;
+}
+
+.msg-danger {
+    display: block;
+    background-color: #ed5a5a;
+}
+
+#pricing_mode,
+#pricing_mode option {
+    text-transform: capitalize;
+}

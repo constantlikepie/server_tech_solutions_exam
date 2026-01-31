@@ -14,8 +14,8 @@ async function loadProducts() {
       <td>${p.qty}</td>
       <td>${escapeHtml(p.pricing_mode)}</td>
       <td>${Number(p.discount_percent).toFixed(2)}</td>
-      <td>${Number(p.total_price).toFixed(2)}</td>
-      <td>${p.created_at}</td>
+      <td>${formatPrice(Number(p.total_price).toFixed(2))}</td>
+      <td>${formatDateTime(p.created_at)}</td>
     </tr>
   `).join('');
 
@@ -53,11 +53,13 @@ form.addEventListener('submit', async (e) => {
 
   if (!out.success) {
     msg.textContent = out.error || 'Save failed.';
+    msg.classList.add('msg-danger');
     return;
   }
-
-  // INTENTIONAL ISSUE: list does not refresh after save
+  
+  loadProducts();
   msg.textContent = 'Saved.';
+  msg.classList.add('msg-success');
 });
 
 loadProducts();
