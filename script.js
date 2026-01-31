@@ -19,8 +19,23 @@ async function loadProducts() {
     </tr>
   `).join('');
 
-  // INTENTIONAL: summary not implemented
-  summaryEl.innerHTML = '';
+  const summary = data.products.reduce(
+    (acc, p) => {
+      acc.totalItems += Number(p.qty) || 0;
+      acc.totalRevenue += Number(p.total_price) || 0;
+      return acc;
+    },
+    { totalItems: 0, totalRevenue: 0 }
+  );
+
+  summaryEl.innerHTML = `
+    <div class="summary-row">
+      <strong>Total Items:</strong> ${summary.totalItems}
+    </div>
+    <div class="summary-row">
+      <strong>Total Revenue:</strong> ${formatPrice(summary.totalRevenue.toFixed(2))}
+    </div>
+  `;
 }
 
 function escapeHtml(s) {

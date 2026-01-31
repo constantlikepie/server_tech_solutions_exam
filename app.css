@@ -34,3 +34,11 @@
 #pricing_mode option {
     text-transform: capitalize;
 }
+
+#summary {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 2px solid #eee;
+  display: flex;
+  gap: 2rem;
+}
