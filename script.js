@@ -35,6 +35,28 @@ function escapeHtml(s) {
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   msg.textContent = '';
+  
+  msg.classList.remove('msg-danger');
+  msg.classList.remove('msg-success');
+
+  const validationErrors = validateFormData();
+  console.log(validationErrors);
+  if (validationErrors.length > 0) {
+    msg.classList.add('msg-danger');
+
+    msg.innerHTML = "";
+
+    const ul = document.createElement("ul");
+
+    validationErrors.forEach(error => {
+      const li = document.createElement("li");
+      li.textContent = error;
+      ul.appendChild(li);
+    });
+
+    msg.appendChild(ul);
+    return;
+  }
 
   const payload = {
     name: document.getElementById('name').value,
@@ -58,7 +80,8 @@ form.addEventListener('submit', async (e) => {
   }
   
   loadProducts();
-  msg.textContent = 'Saved.';
+  resetForm();
+  msg.textContent = 'Product saved successfully.';
   msg.classList.add('msg-success');
 });
 
