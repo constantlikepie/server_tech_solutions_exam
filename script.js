@@ -39,22 +39,11 @@ form.addEventListener('submit', async (e) => {
   msg.classList.remove('msg-danger');
   msg.classList.remove('msg-success');
 
-  const validationErrors = validateFormData();
+  const validationErrors = validateFormData(); // to test back-end validation, must set the value to []
   console.log(validationErrors);
+
   if (validationErrors.length > 0) {
-    msg.classList.add('msg-danger');
-
-    msg.innerHTML = "";
-
-    const ul = document.createElement("ul");
-
-    validationErrors.forEach(error => {
-      const li = document.createElement("li");
-      li.textContent = error;
-      ul.appendChild(li);
-    });
-
-    msg.appendChild(ul);
+    displayAlertMessage(validationErrors);
     return;
   }
 
@@ -74,7 +63,7 @@ form.addEventListener('submit', async (e) => {
   const out = await res.json();
 
   if (!out.success) {
-    msg.textContent = out.error || 'Save failed.';
+    displayAlertMessage(out.errors);
     msg.classList.add('msg-danger');
     return;
   }

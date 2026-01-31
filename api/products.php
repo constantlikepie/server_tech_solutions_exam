@@ -28,10 +28,36 @@ if ($method === 'POST') {
   $qty = (int)($data['qty'] ?? 0);
   $pricing_mode = (string)($data['pricing_mode'] ?? 'standard');
 
-  // INTENTIONAL: incomplete validation
-  if ($name === '' || $unit_price <= 0) {
+  $errors = [];
+  $valid_modes = ['standard', 'bulk', 'clearance'];
+
+  if ($name === '') {
+    $errors[] = 'Name must not be empty.';
+  }
+
+  if (!is_numeric($data['unit_price'] ?? null) || $unit_price <= 0) {
+    $errors[] = 'Unit price must be greater than 0.';
+  }
+
+  $rawQty = $data['qty'] ?? null;
+  if (!is_numeric($rawQty) || (int)$rawQty < 0) {
+    $errors[] = 'Quantity must be 0 or greater.';
+  }
+
+  if (!in_array($pricing_mode, $valid_modes, true)) {
+    $errors[] = 'Pricing mode must be one of: standard, bulk, clearance.';
+  }
+
+  if ($pricing_mode === 'bulk' && (int)$qty < 5) {
+    $errors[] = 'Bulk pricing requires a minimum quantity of 5.';
+  }
+
+  if (!empty($errors)) {
     http_response_code(400);
-    echo json_encode(['success' => false, 'error' => 'Invalid input']);
+    echo json_encode([
+      'success' => false,
+      'errors' => $errors
+    ]);
     exit;
   }
 
