@@ -54,7 +54,7 @@ form.addEventListener('submit', async (e) => {
   msg.classList.remove('msg-danger');
   msg.classList.remove('msg-success');
 
-  const validationErrors = validateFormData(); // to test back-end validation, must set the value to []
+  const validationErrors = validateFormData(); // to test back-end validation, must set the value to empty array
   console.log(validationErrors);
 
   if (validationErrors.length > 0) {
